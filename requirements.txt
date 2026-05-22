@@ -1,0 +1,35 @@
+# ============================================================
+# RecruitAI — Full Project Requirements
+# ============================================================
+# Scanned source: every .py file and every .ipynb notebook in the project.
+# Only packages with an explicit import statement are listed here.
+# Install with: pip install -r requirements.txt
+
+# Web Framework
+fastapi==0.111.0
+pydantic==2.7.1
+pydantic-settings==2.2.1
+
+# Machine Learning & NLP
+sentence-transformers==3.0.0
+scikit-learn==1.5.0
+nltk==3.8.1
+
+# PDF & Document Processing
+pdfplumber==0.11.0
+python-docx==1.1.0
+
+# Database
+# No database dependencies — resume embeddings are persisted as .pkl files
+
+# Utilities
+numpy==1.26.4
+pandas==2.2.2
+joblib==1.4.2
+tqdm==4.66.4
+wordcloud==1.9.3
+matplotlib==3.9.0
+
+# Development
+# No development-only imports found in scanned files
+# (jupyter / ipykernel are execution-environment packages, not imported)
