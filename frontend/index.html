@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecruitAI — AI Resume Screener</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Cabin:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/pages/dashboard.css" />
+
+  <style>
+    /* ── Global overrides for this page ── */
+    body {
+      background: #000000;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    /* ══════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════ */
+    .lp-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: transparent;
+    }
+    .lp-nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 16px 120px;
+      height: 102px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .lp-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+    }
+    .lp-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .lp-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: #7b39fc;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .lp-logo-text {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+    .lp-nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 4px;
+    }
+    .lp-nav-links a {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .lp-nav-links a:hover { background: rgba(255,255,255,0.08); }
+    .lp-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-signin {
+      background: #ffffff;
+      color: #171717;
+      border: 1px solid #d4d4d4;
+      border-radius: 8px;
+      padding: 8px 20px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-signin:hover { opacity: 0.85; }
+    .btn-getstarted-nav {
+      background: #7b39fc;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 20px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-getstarted-nav:hover { opacity: 0.88; }
+
+    /* ══════════════════════════════════════
+       HERO SECTION
+    ══════════════════════════════════════ */
+    .lp-hero {
+      min-height: 100vh;
+      background: #000000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Radial glow behind hero text */
+    .lp-hero::before {
+      content: '';
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(123,57,252,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .lp-hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 162px;
+      padding: 0 24px;
+    }
+
+    /* ── Hero Heading ── */
+    .lp-hero-heading {
+      max-width: 871px;
+      margin: 0 auto 28px;
+      letter-spacing: -2px;
+    }
+    .lp-hero-heading .line1 {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 76px;
+      color: #ffffff;
+      letter-spacing: -2px;
+      line-height: 1.05;
+    }
+    .lp-hero-heading .line2 {
+      display: block;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 76px;
+      color: #ffffff;
+      letter-spacing: -2px;
+      line-height: 1.05;
+    }
+
+    /* ── Subtitle ── */
+    .lp-hero-subtitle {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: #f6f7f9;
+      opacity: 0.9;
+      max-width: 613px;
+      line-height: 26px;
+      margin: 0 auto 40px;
+    }
+
+    /* ── CTA Buttons ── */
+    .lp-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 72px;
+    }
+    .btn-cta-primary {
+      background: #7b39fc;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-family: 'Cabin', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-cta-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-cta-secondary {
+      background: #2b2344;
+      color: #f6f7f9;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-family: 'Cabin', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-cta-secondary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ── Dashboard Container ── */
+    .lp-dashboard-wrap {
+      width: 1163px;
+      max-width: 90vw;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid transparent;
+      background-clip: padding-box;
+      border-radius: 24px;
+      padding: 22.5px;
+      position: relative;
+      margin-bottom: 80px;
+      box-shadow: 0 0 80px rgba(123, 57, 252, 0.12), 0 32px 80px rgba(0,0,0,0.6);
+    }
+    /* Glowing border effect using pseudo-element */
+    .lp-dashboard-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(123,57,252,0.5), rgba(255,255,255,0.08), rgba(123,57,252,0.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ── Dashboard Inner UI ── */
+    .dash-inner {
+      background: #0d0d0d;
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 480px;
+    }
+    .dash-topbar {
+      background: #111111;
+      border-bottom: 1px solid #1e1e1e;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dash-topbar-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .dash-topbar-badge {
+      background: rgba(123,57,252,0.2);
+      border: 1px solid rgba(123,57,252,0.4);
+      color: #a07dfb;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-family: 'Manrope', sans-serif;
+    }
+    .dash-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px;
+    }
+    .dash-jd-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .dash-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .dash-jd-box {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      color: #9ca3af;
+      line-height: 1.6;
+      flex: 1;
+      min-height: 120px;
+    }
+    .dash-analyze-btn {
+      background: #7b39fc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: 'Cabin', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+    }
+    .dash-results-panel { display: flex; flex-direction: column; gap: 10px; }
+    .dash-result-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .dash-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      color: #fff;
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    .dash-card-info { flex: 1; min-width: 0; }
+    .dash-card-role {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #f9fafb;
+      margin-bottom: 4px;
+    }
+    .dash-bar-wrap {
+      height: 4px;
+      background: #2a2a2a;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .dash-bar {
+      height: 100%;
+      border-radius: 99px;
+    }
+    .dash-score {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .score-green { color: #10b981; }
+    .score-yellow { color: #f59e0b; }
+
+    /* ── Stats Row below dashboard ── */
+    .lp-stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      padding: 48px 24px 80px;
+      flex-wrap: wrap;
+    }
+    .lp-stat { text-align: center; }
+    .lp-stat-val {
+      font-family: 'Inter', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -1px;
+      margin-bottom: 6px;
+    }
+    .lp-stat-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      color: #6b7280;
+      font-weight: 400;
+    }
+
+    /* ══════════════════════════════════════
+       QUICK MATCH SECTION (dark card)
+    ══════════════════════════════════════ */
+    .lp-section {
+      background: #000000;
+      padding: 0 24px 80px;
+    }
+    .lp-section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .lp-section-heading {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 32px;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .lp-section-sub {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      color: #6b7280;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .qm-card {
+      background: #0d0d0d;
+      border: 1px solid #1e1e1e;
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .qm-card textarea {
+      background: #111111;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      color: #f9fafb;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-family: 'Manrope', sans-serif;
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      transition: border-color 0.2s;
+      line-height: 1.6;
+    }
+    .qm-card textarea:focus {
+      outline: none;
+      border-color: #7b39fc;
+    }
+    .qm-card textarea::placeholder { color: #4b5563; }
+    .qm-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .qm-result-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: #111111;
+      border: 1px solid #1e1e1e;
+      border-radius: 10px;
+      margin-top: 8px;
+      transition: border-color 0.2s;
+    }
+    .qm-result-item:hover { border-color: rgba(123,57,252,0.4); }
+    .qm-rank {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #4b5563;
+      min-width: 22px;
+    }
+    .qm-info { flex: 1; min-width: 0; }
+    .qm-category {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+    .qm-snippet {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      color: #4b5563;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .qm-bar { width: 100px; }
+    .qm-score {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .qm-top-k {
+      background: #111111;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      color: #f9fafb;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-family: 'Manrope', sans-serif;
+      cursor: pointer;
+    }
+
+    /* ── Categories ── */
+    .lp-cats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .lp-cat-pill {
+      background: #111111;
+      border: 1px solid #1e1e1e;
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      color: #9ca3af;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .lp-cat-pill:hover {
+      border-color: #7b39fc;
+      color: #a07dfb;
+      background: rgba(123,57,252,0.08);
+    }
+
+    /* ── Footer ── */
+    .lp-footer {
+      border-top: 1px solid #1e1e1e;
+      padding: 24px;
+      text-align: center;
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      color: #4b5563;
+    }
+    .lp-footer a { color: #7b39fc; text-decoration: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .lp-nav-inner { padding: 16px 24px; }
+      .lp-nav-left  { gap: 32px; }
+      .lp-hero-heading .line1,
+      .lp-hero-heading .line2 { font-size: 48px; }
+      .lp-hero-content { margin-top: 120px; }
+      .dash-body { grid-template-columns: 1fr; }
+      .lp-stats-row { gap: 32px; }
+    }
+    @media (max-width: 600px) {
+      .lp-nav-links { display: none; }
+      .lp-hero-heading .line1,
+      .lp-hero-heading .line2 { font-size: 36px; letter-spacing: -1px; }
+      .lp-hero-subtitle { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════ -->
+<nav class="lp-nav">
+  <div class="lp-nav-inner">
+    <div class="lp-nav-left">
+      <a href="index.html" class="lp-logo">
+        <div class="lp-logo-icon">R</div>
+        <span class="lp-logo-text">RecruitAI</span>
+      </a>
+      <ul class="lp-nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="upload.html">Upload</a></li>
+        <li><a href="results.html">Results</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+    <div class="lp-nav-right">
+<!--- <a href="results.html" class="btn-signin">Sign In</a> --->
+      <a href="upload.html"  class="btn-getstarted-nav">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="lp-hero">
+
+  <div class="lp-hero-content">
+
+    <!-- Heading -->
+    <h1 class="lp-hero-heading">
+      <span class="line1">Screen resumes</span>
+      <span class="line2">intelligently with AI</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="lp-hero-subtitle">
+      Paste a job description and let BERT rank every candidate by semantic match score — not keyword count. Find the right talent in seconds.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="lp-cta-row">
+      <a href="upload.html" class="btn-cta-primary">
+        ✦ Get Started Free
+      </a>
+      <a href="#quick-match" class="btn-cta-secondary">
+        ▶ Watch Demo
+      </a>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div class="lp-dashboard-wrap">
+      <div class="dash-inner">
+
+        <!-- Top bar -->
+        <div class="dash-topbar">
+          <span class="dash-topbar-title">RecruitAI — Resume Matcher</span>
+          <span class="dash-topbar-badge">BERT · all-MiniLM-L6-v2</span>
+        </div>
+
+        <!-- Body -->
+        <div class="dash-body">
+
+          <!-- Left: JD input mock -->
+          <div class="dash-jd-panel">
+            <span class="dash-label">Job Description</span>
+            <div class="dash-jd-box">
+              Looking for a <strong style="color:#a07dfb">Senior Data Scientist</strong> with 5+ years of experience in Python, machine learning, deep learning, NLP, and statistical modelling. PyTorch or TensorFlow required. Experience with LLMs is a strong plus…
+            </div>
+            <button class="dash-analyze-btn">🔍 Find Matches</button>
+          </div>
+
+          <!-- Right: Results mock -->
+          <div class="dash-results-panel">
+            <span class="dash-label">Top Candidates</span>
+
+            <div class="dash-result-card">
+              <div class="dash-avatar" style="background:rgba(16,185,129,0.2);color:#10b981;">DS</div>
+              <div class="dash-card-info">
+                <div class="dash-card-role">Data Science</div>
+                <div class="dash-bar-wrap">
+                  <div class="dash-bar" style="width:92%;background:#10b981;"></div>
+                </div>
+              </div>
+              <span class="dash-score score-green">92.4%</span>
+            </div>
+
+            <div class="dash-result-card">
+              <div class="dash-avatar" style="background:rgba(16,185,129,0.15);color:#10b981;">ML</div>
+              <div class="dash-card-info">
+                <div class="dash-card-role">Machine Learning</div>
+                <div class="dash-bar-wrap">
+                  <div class="dash-bar" style="width:87%;background:#10b981;"></div>
+                </div>
+              </div>
+              <span class="dash-score score-green">87.1%</span>
+            </div>
+
+            <div class="dash-result-card">
+              <div class="dash-avatar" style="background:rgba(245,158,11,0.15);color:#f59e0b;">AI</div>
+              <div class="dash-card-info">
+                <div class="dash-card-role">Artificial Intelligence</div>
+                <div class="dash-bar-wrap">
+                  <div class="dash-bar" style="width:74%;background:#f59e0b;"></div>
+                </div>
+              </div>
+              <span class="dash-score score-yellow">74.3%</span>
+            </div>
+
+            <div class="dash-result-card">
+              <div class="dash-avatar" style="background:rgba(245,158,11,0.1);color:#f59e0b;">PY</div>
+              <div class="dash-card-info">
+                <div class="dash-card-role">Python Developer</div>
+                <div class="dash-bar-wrap">
+                  <div class="dash-bar" style="width:68%;background:#f59e0b;"></div>
+                </div>
+              </div>
+              <span class="dash-score score-yellow">68.9%</span>
+            </div>
+
+          </div>
+        </div><!-- /dash-body -->
+      </div><!-- /dash-inner -->
+    </div><!-- /lp-dashboard-wrap -->
+
+  </div><!-- /lp-hero-content -->
+
+  <!-- Stats row -->
+  <div class="lp-stats-row">
+    <div class="lp-stat">
+      <div class="lp-stat-val" id="stat-resumes">2,484</div>
+      <div class="lp-stat-label">Resumes indexed</div>
+    </div>
+    <div class="lp-stat">
+      <div class="lp-stat-val" id="stat-cats">25</div>
+      <div class="lp-stat-label">Job categories</div>
+    </div>
+    <div class="lp-stat">
+      <div class="lp-stat-val">1.2s</div>
+      <div class="lp-stat-label">Avg match time</div>
+    </div>
+    <div class="lp-stat">
+      <div class="lp-stat-val">94%</div>
+      <div class="lp-stat-label">Precision@5</div>
+    </div>
+  </div>
+
+</section><!-- /lp-hero -->
+
+<!-- ══════════════════════════════════════
+     QUICK MATCH SECTION
+══════════════════════════════════════ -->
+<section class="lp-section" id="quick-match">
+  <div class="lp-section-inner">
+    <h2 class="lp-section-heading">Try it now</h2>
+    <p class="lp-section-sub">Paste any job description and see live results from the dataset.</p>
+
+    <div class="qm-card">
+      <textarea id="jd-textarea" placeholder="Paste a job description here… e.g. Senior Python developer with FastAPI, PostgreSQL, and Docker experience…"></textarea>
+
+      <div class="qm-footer">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <select id="top-k-select" class="qm-top-k">
+            <option value="5">Top 5</option>
+            <option value="10" selected>Top 10</option>
+            <option value="20">Top 20</option>
+          </select>
+          <span id="qm-status" style="font-size:12px;color:#4b5563;font-family:'Manrope',sans-serif;"></span>
+        </div>
+        <button class="btn-cta-primary" id="match-btn" style="padding:10px 20px;font-size:14px;">
+          🔍 Find Matches
+        </button>
+      </div>
+
+      <div id="qm-loading" style="display:none;padding:16px 0;text-align:center;">
+        <span style="font-family:'Manrope',sans-serif;font-size:13px;color:#6b7280;">Searching dataset…</span>
+      </div>
+      <div id="qm-error" style="display:none;padding:10px 14px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:8px;color:#ef4444;font-size:13px;font-family:'Manrope',sans-serif;margin-top:12px;"></div>
+
+      <!-- Skills -->
+      <div id="jd-skills-section" style="display:none;margin-top:16px;">
+        <div style="font-size:11px;font-weight:600;color:#4b5563;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;font-family:'Manrope',sans-serif;">Detected Skills</div>
+        <div id="jd-skills-chips" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+      </div>
+
+      <!-- Results -->
+      <div id="quick-results" style="display:none;margin-top:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-size:12px;color:#6b7280;font-family:'Manrope',sans-serif;">
+            Showing <strong style="color:#f9fafb" id="results-shown">0</strong> candidates
+          </span>
+          <a href="results.html" style="font-size:12px;color:#7b39fc;font-family:'Manrope',sans-serif;text-decoration:none;">View full results →</a>
+        </div>
+        <div id="quick-results-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CATEGORIES
+══════════════════════════════════════ -->
+<section style="background:#000;padding-bottom:80px;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <h2 class="lp-section-heading" style="margin-bottom:8px;">25 Job Categories</h2>
+    <p class="lp-section-sub" style="margin-bottom:28px;">Every resume in the dataset belongs to one of these roles.</p>
+  </div>
+  <div class="lp-cats-grid" id="categories-grid">
+    <span style="font-size:13px;color:#4b5563;font-family:'Manrope',sans-serif;">Loading…</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="lp-footer">
+  Built with FastAPI + BERT (sentence-transformers) &bull;
+  Dataset: <a href="https://www.kaggle.com/datasets/gauravduttakiit/resume-dataset" target="_blank">Kaggle Resume Dataset</a> &bull;
+  <a href="about.html">About the project</a>
+</footer>
+
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script>
+
+  // ── Load categories ──
+  (async () => {
+    try {
+      const data = await getCategories();
+      const grid = document.getElementById('categories-grid');
+      document.getElementById('stat-cats').textContent = data.total;
+      grid.innerHTML = data.categories
+        .map(c => `<span class="lp-cat-pill">${escapeHtml(c)}</span>`)
+        .join('');
+    } catch {
+      document.getElementById('categories-grid').innerHTML =
+        '<span style="font-size:13px;color:#4b5563;font-family:Manrope,sans-serif;">Start the backend to load categories.</span>';
+    }
+  })();
+
+  // ── Health ──
+  (async () => {
+    try {
+      const h = await checkHealth();
+      if (h.resume_count) {
+        document.getElementById('stat-resumes').textContent = h.resume_count.toLocaleString();
+      }
+    } catch {}
+  })();
+
+  // ── Quick Match ──
+  document.getElementById('match-btn').addEventListener('click', async () => {
+    const jd     = document.getElementById('jd-textarea').value.trim();
+    const topK   = parseInt(document.getElementById('top-k-select').value, 10);
+    const errEl  = document.getElementById('qm-error');
+    const loading = document.getElementById('qm-loading');
+    const btn    = document.getElementById('match-btn');
+
+    errEl.style.display = 'none';
+    document.getElementById('quick-results').style.display = 'none';
+    document.getElementById('jd-skills-section').style.display = 'none';
+
+    if (jd.length < 10) {
+      errEl.textContent = 'Please enter at least 10 characters.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    loading.style.display = 'block';
+    btn.disabled = true;
+
+    const t0 = Date.now();
+    try {
+      const data = await matchResumes(jd, topK);
+
+      sessionStorage.setItem('recruitai_results', JSON.stringify({
+        ...data, job_description: jd, elapsed_ms: Date.now() - t0,
+      }));
+
+      // Skills
+      if (data.jd_skills?.length) {
+        document.getElementById('jd-skills-section').style.display = 'block';
+        document.getElementById('jd-skills-chips').innerHTML = data.jd_skills
+          .map(s => `<span style="background:rgba(123,57,252,0.12);border:1px solid rgba(123,57,252,0.25);border-radius:99px;padding:3px 10px;font-size:11px;color:#a07dfb;font-family:'Manrope',sans-serif;font-weight:500;">${escapeHtml(s)}</span>`)
+          .join('');
+      }
+
+      // Results
+      document.getElementById('results-shown').textContent = data.results.length;
+      const list = document.getElementById('quick-results-list');
+      list.innerHTML = data.results.map(r => {
+        const tier = scoreTier(r.score);
+        const barColor = tier === 'high' ? '#10b981' : tier === 'medium' ? '#f59e0b' : '#ef4444';
+        const scoreColor = tier === 'high' ? '#10b981' : tier === 'medium' ? '#f59e0b' : '#ef4444';
+        return `
+          <div class="qm-result-item">
+            <span class="qm-rank">#${r.rank}</span>
+            <div class="qm-info">
+              <div class="qm-category">${escapeHtml(r.category)}</div>
+              <div class="qm-snippet">${escapeHtml(truncate(r.snippet, 70))}</div>
+            </div>
+            <div class="qm-bar">
+              <div style="height:4px;background:#2a2a2a;border-radius:99px;overflow:hidden;">
+                <div style="height:100%;width:0;background:${barColor};border-radius:99px;transition:width 0.8s ease;" data-w="${r.score}%"></div>
+              </div>
+            </div>
+            <span class="qm-score" style="color:${scoreColor};">${formatScore(r.score)}</span>
+          </div>`;
+      }).join('');
+
+      document.getElementById('quick-results').style.display = 'block';
+
+      requestAnimationFrame(() => {
+        list.querySelectorAll('[data-w]').forEach(el => { el.style.width = el.dataset.w; });
+      });
+
+    } catch (err) {
+      errEl.textContent = err.message || 'Could not connect to API. Make sure the backend is running.';
+      errEl.style.display = 'block';
+    } finally {
+      loading.style.display = 'none';
+      btn.disabled = false;
+    }
+  });
+
+</script>
+</body>
+</html>

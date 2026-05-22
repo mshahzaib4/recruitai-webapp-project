@@ -1,0 +1,440 @@
+/* ══════════════════════════════════════════════════════════
+   HERO SECTION — Option 3: Glowing Orbs + Dot Grid
+   + Typewriter cursor + Watch Demo modal
+   All contained here. Upload form styles are below, unchanged.
+══════════════════════════════════════════════════════════ */
+
+.upload-hero-section {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 80px 32px 88px;
+  /* Dot grid base pattern */
+  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Background video — lowest layer ── */
+.hero-bg-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* ── Glowing Orbs — sit above video ── */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+  animation: orbFloat 8s ease-in-out infinite alternate;
+}
+.hero-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(123,57,252,0.35), transparent 70%);
+  top: -100px; left: -150px;
+  filter: blur(80px);
+}
+.hero-orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(123,57,252,0.28), transparent 70%);
+  top: 50px; right: -100px;
+  filter: blur(100px);
+  animation-delay: 2s;
+}
+@keyframes orbFloat {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-30px); }
+}
+
+/* ── Dot grid textures over video + orbs ── */
+.hero-dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Gradient fade into page black at bottom ── */
+.hero-fade-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, #000000);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Hero content above all layers ── */
+.hero-inner {
+  position: relative;
+  z-index: 4;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero-back-link {
+  display: inline-flex;
+  margin-bottom: 28px;
+}
+
+.hero-eyebrow-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+.hero-eyebrow-dot   { color: #4b5563; }
+.hero-eyebrow-label { color: #6b7280; }
+
+.hero-main-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 54px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -2.5px;
+  line-height: 1.05;
+  margin: 0 0 4px;
+}
+
+/* Tagline typed in Great Vibes signature font */
+.hero-tagline {
+  font-family: 'Great Vibes', cursive;
+  font-size: 64px;
+  color: #a07dfb;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 22px;
+  min-height: 82px; /* prevent layout shift while typing */
+  letter-spacing: 0;
+}
+
+/* ── Typewriter cursor ── */
+.tw-cursor {
+  display: inline-block;
+  color: #7b39fc;
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+  vertical-align: middle;
+  animation: twBlink 0.6s step-end infinite;
+}
+@keyframes twBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.tw-cursor-fade {
+  animation: twFade 1s ease forwards;
+}
+@keyframes twFade {
+  to { opacity: 0; }
+}
+
+.hero-main-desc {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  color: #9ca3af;
+  max-width: 540px;
+  margin: 0 auto 32px;
+  line-height: 1.75;
+}
+
+/* ── CTA row: Upload button + Watch Demo ── */
+.hero-cta-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.hero-upload-btn {
+  text-decoration: none;
+}
+
+/* ── Stats row ── */
+.hero-stats-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 16px 28px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+}
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.hero-stat-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #a07dfb;
+  letter-spacing: -0.5px;
+}
+.hero-stat-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.hero-stat-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+
+/* ── Responsive hero ── */
+@media (max-width: 860px) {
+  .hero-main-title { font-size: 40px; letter-spacing: -1.5px; }
+  .hero-tagline    { font-size: 48px; min-height: 64px; }
+  .upload-hero-section { padding: 60px 20px 72px; }
+  .hero-stats-row  { gap: 16px; padding: 14px 20px; }
+}
+@media (max-width: 500px) {
+  .hero-main-title { font-size: 32px; }
+  .hero-tagline    { font-size: 38px; min-height: 52px; }
+  .hero-stat-divider { display: none; }
+  .hero-stats-row  { gap: 20px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   UPLOAD PAGE — existing styles below, completely unchanged
+══════════════════════════════════════════════════════════ */
+
+/* ── Upload Page ── */
+.page-content {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+  box-sizing: border-box;
+}
+
+/* Override the global .glass width so cards fill their grid cells
+   instead of trying to be 1163px and overflowing the column */
+.page-content .glass {
+  width: 100%;
+  max-width: 100%;
+}
+
+.page-heading { margin-bottom: 32px; }
+
+/* ── Two-column layout ── */
+.upload-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 860px) { .upload-layout { grid-template-columns: 1fr; } }
+
+/* ── Upload Card header ── */
+.upload-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* ── Drop Zone ── */
+.dropzone {
+  border: 2px dashed #2a2a2a;
+  border-radius: 14px;
+  padding: 40px 24px;
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+.dropzone.drag-over {
+  border-color: #7b39fc;
+  background: rgba(123,57,252,0.06);
+}
+.dropzone-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.dropzone-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: #ffffff; margin-bottom: 6px;
+}
+.dropzone-sub {
+  font-size: 13px; color: #4b5563;
+  font-family: 'Manrope', sans-serif;
+  margin-bottom: 16px;
+}
+.dropzone-limit {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #4b5563;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* ── File type badges ── */
+.file-type-badges {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.file-type-badge {
+  padding: 3px 10px;
+  background: #111111;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* ── File List ── */
+.file-list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  border-radius: 10px;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } }
+.file-item-icon {
+  width: 36px; height: 36px;
+  background: rgba(123,57,252,0.12);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #a07dfb;
+  font-size: 11px; font-weight: 700;
+  font-family: 'Space Mono', monospace;
+  flex-shrink: 0;
+}
+.file-item-info { flex: 1; min-width: 0; }
+.file-item-name {
+  font-size: 13px; font-weight: 600; color: #f9fafb;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: 'Manrope', sans-serif;
+}
+.file-item-size {
+  font-size: 12px; color: #4b5563;
+  font-family: 'Manrope', sans-serif;
+}
+.file-remove-btn {
+  background: none; border: none;
+  color: #4b5563; font-size: 1rem;
+  padding: 4px; border-radius: 4px;
+  transition: color 0.2s; flex-shrink: 0; cursor: pointer;
+}
+.file-remove-btn:hover { color: #ef4444; }
+
+/* ── Add More ── */
+.btn-ghost-full {
+  display: block; width: 100%;
+  background: none;
+  border: 1px dashed #2a2a2a;
+  border-radius: 10px;
+  color: #6b7280;
+  font-family: 'Manrope', sans-serif; font-size: 13px;
+  padding: 10px; cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost-full:hover { border-color: #7b39fc; color: #a07dfb; }
+
+/* ── JD Card ── */
+.jd-card { display: flex; flex-direction: column; }
+
+.form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+
+/* ── JD Tips ── */
+.jd-tips {
+  padding: 12px 14px;
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  border-radius: 10px;
+  font-size: 13px; color: #6b7280;
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.jd-tips strong { color: #a07dfb; }
+
+/* ── Upload Footer ── */
+.upload-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.upload-status {
+  font-size: 13px; color: #6b7280;
+  font-family: 'Manrope', sans-serif;
+}
+.submit-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.enter-hint {
+  font-size: 12px; color: #4b5563;
+  font-family: 'Manrope', sans-serif;
+  display: flex; align-items: center; gap: 4px;
+}
+kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #111111;
+  border: 1px solid #2a2a2a;
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: #6b7280;
+  line-height: 1.6;
+}
+.upload-note {
+  margin-top: 16px;
+  font-size: 13px; color: #4b5563;
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.6;
+}
+
+/* ── Error icon (injected by showError in upload.js) ── */
+.err-icon { font-size: 1rem; margin-top: 1px; flex-shrink: 0; }
+
+/* ── Spinner small ── */
+.spinner-sm { width: 14px; height: 14px; border-width: 2px; }
+
+/* ── How it works grid ── */
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 700px) { .how-grid { grid-template-columns: 1fr; } }

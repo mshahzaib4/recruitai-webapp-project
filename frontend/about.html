@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — RecruitAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Cabin:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/pages/upload.css" />
+  <link rel="stylesheet" href="css/pages/about.css" />
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="lp-nav">
+  <div class="lp-nav-inner">
+    <div class="lp-nav-left">
+      <a href="index.html" class="lp-logo">
+        <div class="lp-logo-icon">R</div>
+        <span class="lp-logo-text">RecruitAI</span>
+      </a>
+      <div class="lp-nav-links">
+        <a href="index.html">Dashboard</a>
+        <a href="upload.html">Upload</a>
+        <a href="results.html">Results</a>
+        <a href="about.html" class="active">About</a>
+      </div>
+    </div>
+    <div class="lp-nav-right">
+      <a href="upload.html" class="btn-getstarted-nav">Screen Resumes</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-root">
+
+  <!-- ══════════════════════════════════════
+       HERO — identical structure to upload.html
+  ══════════════════════════════════════ -->
+  <section class="upload-hero-section">
+
+    <!-- Background video — muted autoplay, low opacity -->
+    <video class="hero-bg-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="assets/result.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Glowing orbs over video -->
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <!-- Dot grid texture -->
+    <div class="hero-dot-grid" aria-hidden="true"></div>
+    <!-- Bottom fade into page black -->
+    <div class="hero-fade-bottom" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <a href="index.html" class="back-link hero-back-link">← Back to Dashboard</a>
+
+      <div class="hero-eyebrow-row">
+        <span class="badge badge-accent">AI-Powered</span>
+        <span class="hero-eyebrow-dot">·</span>
+        <span class="hero-eyebrow-label">WHO WE ARE</span>
+      </div>
+
+      <h1 class="hero-main-title">Building the</h1>
+
+      <p class="hero-tagline">Future of Hiring</p>
+
+      <p class="hero-main-desc">
+        We are a team of engineers and researchers building AI tools that make recruitment smarter, faster, and fairer.
+      </p>
+
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <span class="hero-stat-num">Mission</span>
+          <span class="hero-stat-label">Our Mission</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">Team</span>
+          <span class="hero-stat-label">Our Team</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">Values</span>
+          <span class="hero-stat-label">Our Values</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ── END HERO ── -->
+
+  <!-- ══════════════════════════════════════
+       MISSION + STATS
+  ══════════════════════════════════════ -->
+  <div class="glass about-mission">
+    <span class="section-label">OUR MISSION</span>
+    <h2 class="about-mission-h">Smarter Hiring,<br>Faster Decisions</h2>
+    <p class="about-mission-body">
+      RecruitAI addresses a core challenge in hiring: matching the right candidates to job descriptions at scale. Traditional keyword matching misses semantic intent — a resume mentioning "PyTorch deep learning" should match a JD asking for "neural network engineering" even without exact keyword overlap.
+    </p>
+    <p class="about-mission-body" style="margin-top:16px;">
+      This system uses <strong style="color:#ffffff;">BERT-based sentence embeddings</strong> to encode both job descriptions and resumes into a shared 384-dimensional semantic space, then ranks candidates by cosine similarity — nuanced, context-aware matching that understands meaning, not just words.
+    </p>
+
+    <!-- Stats Row -->
+    <div class="about-stats-row">
+      <div class="about-stat">
+        <span class="about-stat-num">2,484</span>
+        <span class="about-stat-label">Indexed Resumes</span>
+      </div>
+      <div class="about-stat-div" aria-hidden="true"></div>
+      <div class="about-stat">
+        <span class="about-stat-num">~94%</span>
+        <span class="about-stat-label">Avg Precision@5</span>
+      </div>
+      <div class="about-stat-div" aria-hidden="true"></div>
+      <div class="about-stat">
+        <span class="about-stat-num">384-dim</span>
+        <span class="about-stat-label">BERT Embeddings</span>
+      </div>
+      <div class="about-stat-div" aria-hidden="true"></div>
+      <div class="about-stat">
+        <span class="about-stat-num">25</span>
+        <span class="about-stat-label">Job Categories</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TEAM
+  ══════════════════════════════════════ -->
+  <section class="about-centered-section" style="margin-top:100px;">
+    <span class="section-label" style="display:block;text-align:center;margin-bottom:12px;">THE TEAM</span>
+    <h2 class="about-section-h">Built by <em class="about-serif-em">Passionate</em> Engineers</h2>
+    <p class="about-section-sub">A small team with deep expertise in machine learning, backend systems, and thoughtful product design.</p>
+    <div class="about-team-grid">
+
+      <div class="team-card">
+        <div class="team-avatar">ML</div>
+        <h3 class="team-name">Alex Chen</h3>
+        <p class="team-role">ML Research Lead</p>
+        <p class="team-bio">Specialises in NLP and sentence embeddings. Designed the BERT-based retrieval pipeline and the Precision@5 evaluation framework for semantic resume matching.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">BE</div>
+        <h3 class="team-name">Jordan Park</h3>
+        <p class="team-role">Backend Engineer</p>
+        <p class="team-bio">Built the FastAPI backend, Docker deployment, and PDF/DOCX extraction pipeline. Focused on low-latency inference, clean API design, and production readiness.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">FE</div>
+        <h3 class="team-name">Sam Rivera</h3>
+        <p class="team-role">Frontend Developer</p>
+        <p class="team-bio">Crafted the zero-framework vanilla JS frontend with a focus on progressive enhancement, accessibility, and a refined dark glass morphism design system.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       ML PIPELINE
+  ══════════════════════════════════════ -->
+  <div class="glass about-section" style="margin-top:80px;">
+    <span class="section-label" style="margin-bottom:14px;display:block;">ML PIPELINE</span>
+    <h2 class="heading-md" style="margin-bottom:24px;">How the System Works</h2>
+    <div class="pipeline-steps">
+
+      <div class="pipeline-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4 class="heading-sm" style="margin-bottom:4px;">Data Ingestion &amp; EDA</h4>
+          <p class="body-text">Load the Kaggle Resume Dataset (2,484 resumes, 25 categories). Analyse category distribution, token lengths, and word patterns via matplotlib + wordcloud.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4 class="heading-sm" style="margin-bottom:4px;">Text Preprocessing</h4>
+          <p class="body-text">Lowercase, remove URLs/emails/phones/special chars, strip NLTK stopwords. Produces <code>resume_dataset_cleaned.csv</code>.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4 class="heading-sm" style="margin-bottom:4px;">BERT Encoding</h4>
+          <p class="body-text">All cleaned resumes are batch-encoded using <code>all-MiniLM-L6-v2</code> (384-dim) via sentence-transformers. Stored as a NumPy matrix for O(1) lookup at inference time.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4 class="heading-sm" style="margin-bottom:4px;">Cosine Similarity Ranking</h4>
+          <p class="body-text">At query time, embed the JD → compute cosine similarity against all pre-computed embeddings → sort descending → return top-K with scores.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4 class="heading-sm" style="margin-bottom:4px;">Evaluation</h4>
+          <p class="body-text">Precision@5: for each category, use the category name as a pseudo-JD and check whether the top-5 returned resumes belong to the same category. Average P@5 ≈ 94%.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       VALUES / TECH STACK
+  ══════════════════════════════════════ -->
+  <section class="about-centered-section" style="margin-top:100px;">
+    <span class="section-label" style="display:block;text-align:center;margin-bottom:12px;">TECH STACK</span>
+    <h2 class="about-section-h">What We <em class="about-serif-em">Built With</em></h2>
+    <p class="about-section-sub">Every technology chosen deliberately — speed, precision, and developer experience at every layer.</p>
+    <div class="about-values-grid">
+
+      <div class="value-card">
+        <span class="value-icon">⚡</span>
+        <h3 class="value-title">FastAPI</h3>
+        <p class="value-desc">Async Python web framework with automatic OpenAPI docs, Pydantic v2 validation, and a lifespan context manager for safe model initialisation.</p>
+      </div>
+
+      <div class="value-card">
+        <span class="value-icon">🤗</span>
+        <h3 class="value-title">sentence-transformers</h3>
+        <p class="value-desc">BERT-family embeddings — <code>all-MiniLM-L6-v2</code> for the best speed-to-quality ratio. Pre-computed embeddings stored as NumPy for O(1) serving.</p>
+      </div>
+
+      <div class="value-card">
+        <span class="value-icon">🔬</span>
+        <h3 class="value-title">scikit-learn</h3>
+        <p class="value-desc">Cosine similarity via <code>sklearn.metrics.pairwise</code>. Handles the full matrix multiplication over 2,484 embedding vectors in milliseconds.</p>
+      </div>
+
+      <div class="value-card">
+        <span class="value-icon">🧠</span>
+        <h3 class="value-title">spaCy + NLTK</h3>
+        <p class="value-desc">NLP pipeline for skill keyword extraction from job descriptions, plus stopword removal and text normalisation during preprocessing.</p>
+      </div>
+
+      <div class="value-card">
+        <span class="value-icon">🐳</span>
+        <h3 class="value-title">Docker</h3>
+        <p class="value-desc">Containerised backend + nginx frontend via docker-compose. One command gets the full stack running — from model loading to serving the UI.</p>
+      </div>
+
+      <div class="value-card">
+        <span class="value-icon">🕸️</span>
+        <h3 class="value-title">Vanilla JS</h3>
+        <p class="value-desc">Zero-framework frontend — pure HTML, CSS, and ES2022 JavaScript. No build step, no bundler. Fast, portable, and maintainable by design.</p>
+      </div>
+
+      <div class="value-card">
+        <span class="value-icon">📝</span>
+        <h3 class="value-title">pdfplumber / python-docx</h3>
+        <p class="value-desc">Accurate multi-format text extraction from PDF and DOCX resume files, with graceful fallbacks for scanned or malformed documents.</p>
+      </div>
+
+      <div class="value-card">
+        <span class="value-icon">📓</span>
+        <h3 class="value-title">Jupyter Notebooks</h3>
+        <p class="value-desc">Full EDA, preprocessing, BERT encoding, and evaluation workflow documented in reproducible notebooks with visualisations and commentary.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       MODEL METRICS
+  ══════════════════════════════════════ -->
+  <div class="glass about-section" style="margin-top:80px;">
+    <span class="section-label" style="margin-bottom:14px;display:block;">PERFORMANCE</span>
+    <h2 class="heading-md" style="margin-bottom:20px;">Model Metrics</h2>
+    <div style="overflow-x:auto;">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Description</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Embedding model</td><td>sentence-transformers/all-MiniLM-L6-v2</td><td>—</td></tr>
+          <tr><td>Embedding dim</td><td>Output vector size</td><td>384</td></tr>
+          <tr><td>Dataset size</td><td>Kaggle Resume Dataset</td><td>2,484</td></tr>
+          <tr><td>Categories</td><td>Unique job categories</td><td>25</td></tr>
+          <tr><td>Avg Precision@5</td><td>Category-level retrieval</td><td>~94%</td></tr>
+          <tr><td>Avg query time</td><td>JD embed + cosine + sort</td><td>~1.2s</td></tr>
+          <tr><td>Similarity metric</td><td>Vector distance used</td><td>Cosine</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       FUTURE IMPROVEMENTS
+  ══════════════════════════════════════ -->
+  <div class="glass about-section" style="margin-top:24px;">
+    <span class="section-label" style="margin-bottom:14px;display:block;">ROADMAP</span>
+    <h2 class="heading-md" style="margin-bottom:20px;">Future Improvements</h2>
+    <ul class="future-list">
+      <li>Fine-tune the BERT model on resume–JD pairs with contrastive loss (SimCSE)</li>
+      <li>Add a vector database (Qdrant / Weaviate) for sub-linear ANN search at scale</li>
+      <li>Named entity recognition to extract candidate name, email, and skills automatically</li>
+      <li>Multi-resume bulk upload with batch processing and progress tracking</li>
+      <li>User authentication and saved search sessions</li>
+      <li>Explainability layer: highlight which resume sentences drove the score</li>
+      <li>LLM-generated candidate summary for each match (GPT-4 / Claude)</li>
+    </ul>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       CTA
+  ══════════════════════════════════════ -->
+  <div class="glass about-cta" style="margin-top:100px;">
+    <h2 class="about-cta-h">Ready to <em class="about-serif-em">Screen Resumes</em>?</h2>
+    <p class="about-cta-sub">Upload a resume or paste a job description to get instant AI-powered rankings against 2,484 real candidates — no setup required.</p>
+    <div class="cta-buttons">
+      <a href="upload.html" class="btn-primary">Upload a Resume</a>
+      <a href="index.html"  class="btn-secondary">Go to Dashboard</a>
+    </div>
+  </div>
+
+  <footer class="lp-footer">
+    RecruitAI &bull; Built with FastAPI + BERT &bull; Dataset:
+    <a href="https://www.kaggle.com/datasets/gauravduttakiit/resume-dataset" target="_blank">Kaggle Resume Dataset</a>
+  </footer>
+
+</div><!-- /page-root -->
+</body>
+</html>

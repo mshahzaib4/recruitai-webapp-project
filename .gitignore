@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
+
+# Data & Models (too large for git)
+notebook/data/*.csv
+backend/models/saved/*.pkl
+backend/models/saved/bert_model/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large media files (exceed GitHub 100MB limit)
+frontend/assets/*.mp4
+frontend/assets/*.mov
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

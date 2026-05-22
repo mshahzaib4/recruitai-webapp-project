@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Resumes — RecruitAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Cabin:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/pages/upload.css" />
+</head>
+<body>
+
+<!-- Hidden file inputs — at top of body, outside any dropzone -->
+<input type="file" id="file-input"       accept=".pdf,.docx,.txt" multiple style="display:none;position:absolute;" />
+<input type="file" id="file-input-extra" accept=".pdf,.docx,.txt" multiple style="display:none;position:absolute;" />
+
+<!-- ── Navbar ── -->
+<nav class="lp-nav">
+  <div class="lp-nav-inner">
+    <div class="lp-nav-left">
+      <a href="index.html" class="lp-logo">
+        <div class="lp-logo-icon">R</div>
+        <span class="lp-logo-text">RecruitAI</span>
+      </a>
+      <div class="lp-nav-links" id="nav-links">
+        <a href="index.html">Dashboard</a>
+        <a href="upload.html" class="active">Upload</a>
+        <a href="results.html">Results</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <div class="lp-nav-right">
+      <a href="upload.html" class="btn-getstarted-nav">Screen Resumes</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-root">
+
+  <!-- ══════════════════════════════════════════
+       ENHANCED HERO SECTION
+       Video autoplays as background layer.
+       Upload form below is completely unchanged.
+  ══════════════════════════════════════════ -->
+  <section class="upload-hero-section">
+
+    <!-- Background video — muted autoplay, low opacity -->
+    <video class="hero-bg-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="assets/upload.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Glowing orbs over video -->
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <!-- Dot grid texture -->
+    <div class="hero-dot-grid" aria-hidden="true"></div>
+    <!-- Bottom fade into page black -->
+    <div class="hero-fade-bottom" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <a href="index.html" class="back-link hero-back-link">← Back to Dashboard</a>
+
+      <div class="hero-eyebrow-row">
+        <span class="badge badge-accent">AI-Powered</span>
+        <span class="hero-eyebrow-dot">·</span>
+        <span class="hero-eyebrow-label">BERT Semantic Matching · 2,484 Candidates</span>
+      </div>
+
+      <h1 class="hero-main-title">Upload &amp; Screen</h1>
+
+      <!-- Typewriter target — filled by JS, min-height prevents layout shift -->
+      <p class="hero-tagline" id="hero-tagline-target" aria-label="Your Top Candidates"></p>
+
+      <p class="hero-main-desc">
+        Drop up to 20 resumes, paste a job description — RecruitAI ranks every candidate
+        by cosine similarity against a real benchmark pool in seconds.
+      </p>
+
+      <div class="hero-cta-row">
+        <a href="#upload-form-anchor" class="btn-primary hero-upload-btn">📎 Upload Resumes</a>
+      </div>
+
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <span class="hero-stat-num">2,484</span>
+          <span class="hero-stat-label">Indexed Candidates</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">384-dim</span>
+          <span class="hero-stat-label">BERT Embeddings</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">&lt; 3s</span>
+          <span class="hero-stat-label">Avg. Analysis Time</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ── END HERO ── -->
+
+  <!-- Anchor so the "Upload Resumes" CTA scrolls here -->
+  <div id="upload-form-anchor"></div>
+
+  <div class="page-content">
+
+    <!-- ── Upload Form — UNCHANGED ── -->
+    <div class="upload-layout">
+
+      <!-- Left: Drop Zone + File List -->
+      <div class="glass upload-card">
+        <div class="upload-card-header">
+          <h3 class="heading-sm">Resume Files</h3>
+          <span class="badge badge-accent" id="file-count"></span>
+        </div>
+
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">📎</div>
+          <h4 class="dropzone-title">Drag &amp; drop resumes here</h4>
+          <p class="dropzone-sub">or use the button below</p>
+          <button type="button" class="btn-secondary btn-sm" id="browse-btn">Browse Files</button>
+          <div class="file-type-badges">
+            <span class="file-type-badge">PDF</span>
+            <span class="file-type-badge">DOCX</span>
+            <span class="file-type-badge">TXT</span>
+          </div>
+          <p class="dropzone-limit">Up to 20 files · 10 MB each</p>
+        </div>
+
+        <div class="file-list" id="file-list"></div>
+
+        <div id="add-more-wrap" style="display:none;margin-top:12px;">
+          <button type="button" class="btn-ghost-full" id="add-more-btn">+ Add More Files</button>
+        </div>
+
+        <div class="error-banner" id="error-banner" style="display:none"></div>
+      </div>
+
+      <!-- Right: JD + Submit -->
+      <div class="glass jd-card">
+        <h3 class="heading-sm" style="margin-bottom:20px;">Job Description</h3>
+
+        <div class="form-field">
+          <label class="ds-label" for="upload-jd-textarea">Paste the full job description</label>
+          <textarea
+            id="upload-jd-textarea"
+            class="ds-textarea"
+            placeholder="e.g. We are looking for a Machine Learning Engineer with expertise in Python, PyTorch, and NLP to join our AI research team…"
+          ></textarea>
+        </div>
+
+        <div class="jd-tips">
+          <strong>Tip:</strong> Include skills, years of experience, technologies, and responsibilities for better matching accuracy.
+        </div>
+
+        <div class="upload-footer">
+          <span class="upload-status" id="upload-status"></span>
+          <div class="submit-group">
+            <button class="btn-primary" id="submit-btn">🔍 Analyze Resume</button>
+            <span class="enter-hint">or press <kbd>Ctrl</kbd><kbd>Enter</kbd></span>
+          </div>
+        </div>
+
+        <p class="upload-note">
+          Uploaded resumes compete in the full pool of 2,484 indexed candidates so you see exactly where they rank.
+        </p>
+      </div>
+
+    </div><!-- /upload-layout -->
+
+    <!-- ── How it works — UNCHANGED ── -->
+    <div class="glass" style="margin-top:24px;padding:32px;">
+      <h3 class="heading-sm" style="margin-bottom:24px;text-align:center;">How it works</h3>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-step-num">01</div>
+          <h4 class="heading-sm" style="font-size:15px;margin-bottom:6px;">Upload Resumes</h4>
+          <p class="body-text">Upload up to 20 resumes at once (PDF, DOCX, TXT). Text is extracted automatically.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">02</div>
+          <h4 class="heading-sm" style="font-size:15px;margin-bottom:6px;">BERT Encoding</h4>
+          <p class="body-text">Each resume and the job description are encoded into 384-dim semantic vectors.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">03</div>
+          <h4 class="heading-sm" style="font-size:15px;margin-bottom:6px;">Cosine Ranking</h4>
+          <p class="body-text">All candidates ranked by cosine similarity — your uploads compete in the full pool.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-content -->
+
+  <footer class="lp-footer">
+    RecruitAI &bull; BERT-powered resume screening &bull; <a href="about.html">Learn more</a>
+  </footer>
+</div><!-- /page-root -->
+
+
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/upload.js"></script>
+
+<!-- ── Hero enhancements — typewriter + modal only, no upload logic touched ── -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Typewriter Effect ──────────────────────────────────── */
+  var target = document.getElementById('hero-tagline-target');
+  if (target) {
+    var FULL_TEXT = 'Your Top Candidates';
+    var charIndex = 0;
+    var interval  = setInterval(function () {
+      charIndex++;
+      target.innerHTML =
+        FULL_TEXT.slice(0, charIndex) +
+        '<span class="tw-cursor" aria-hidden="true">|</span>';
+      if (charIndex >= FULL_TEXT.length) {
+        clearInterval(interval);
+        setTimeout(function () {
+          var cur = target.querySelector('.tw-cursor');
+          if (cur) cur.classList.add('tw-cursor-fade');
+          setTimeout(function () {
+            if (cur && cur.parentNode) cur.parentNode.removeChild(cur);
+          }, 1000);
+        }, 2000);
+      }
+    }, 60);
+  }
+
+})();
+</script>
+
+</body>
+</html>

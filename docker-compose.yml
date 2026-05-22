@@ -1,0 +1,30 @@
+services:
+  backend:
+    build: ./backend
+    container_name: recruitai-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./backend/models/saved:/app/models/saved
+    environment:
+      - MODEL_PATH=models/saved/bert_model
+      - EMBEDDINGS_PATH=models/saved/resume_embeddings.pkl
+      - DATA_PATH=models/saved/resume_data.pkl
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    image: nginx:alpine
+    container_name: recruitai-frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+    restart: unless-stopped

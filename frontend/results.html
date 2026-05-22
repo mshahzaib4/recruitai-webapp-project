@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results — RecruitAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Cabin:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/pages/upload.css" />
+  <link rel="stylesheet" href="css/pages/results.css" />
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="lp-nav">
+  <div class="lp-nav-inner">
+    <div class="lp-nav-left">
+      <a href="index.html" class="lp-logo">
+        <div class="lp-logo-icon">R</div>
+        <span class="lp-logo-text">RecruitAI</span>
+      </a>
+      <div class="lp-nav-links">
+        <a href="index.html">Dashboard</a>
+        <a href="upload.html">Upload</a>
+        <a href="results.html" class="active">Results</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <div class="lp-nav-right">
+      <a href="upload.html" class="btn-getstarted-nav">Screen Resumes</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-root">
+
+  <!-- ══════════════════════════════════════
+       HERO — identical structure to upload.html
+  ══════════════════════════════════════ -->
+  <section class="upload-hero-section">
+
+    <!-- Background video — muted autoplay, low opacity -->
+    <video class="hero-bg-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="assets/result.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Glowing orbs over video -->
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <!-- Dot grid texture -->
+    <div class="hero-dot-grid" aria-hidden="true"></div>
+    <!-- Bottom fade into page black -->
+    <div class="hero-fade-bottom" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <a href="index.html" class="back-link hero-back-link">← Back to Dashboard</a>
+
+      <div class="hero-eyebrow-row">
+        <span class="badge badge-accent">AI-Powered</span>
+        <span class="hero-eyebrow-dot">·</span>
+        <span class="hero-eyebrow-label">AI-POWERED ANALYSIS</span>
+      </div>
+
+      <h1 class="hero-main-title">Your Analysis</h1>
+
+      <p class="hero-tagline">Results &amp; Insights</p>
+
+      <p class="hero-main-desc">
+        Every uploaded resume ranked by semantic similarity — see exactly where each candidate stands.
+      </p>
+
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <span class="hero-stat-num">Instant</span>
+          <span class="hero-stat-label">Results</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">~94%</span>
+          <span class="hero-stat-label">High Accuracy</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">Secure</span>
+          <span class="hero-stat-label">Processing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ── END HERO ── -->
+
+  <!-- ══════════════════════════════════════
+       RESULTS CONTENT — all IDs preserved,
+       JS rendering untouched
+  ══════════════════════════════════════ -->
+  <div class="page-content-wide">
+
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
+
+    <!-- ── Results Header ── -->
+    <div class="results-header">
+      <div>
+        <h2 class="heading-lg"><span id="result-count">—</span> Candidates Found</h2>
+        <div class="results-meta">
+          <span>Matched in <strong id="match-time">—</strong></span>
+          <span class="meta-sep">·</span>
+          <span>Model: <strong>all-MiniLM-L6-v2</strong></span>
+          <span class="meta-sep">·</span>
+          <span>Metric: <strong>Cosine Similarity</strong></span>
+        </div>
+      </div>
+      <div class="results-header-actions">
+        <button class="btn-secondary btn-sm" id="export-btn">⬇ Export CSV</button>
+        <a href="upload.html" class="btn-primary btn-sm">New Search</a>
+      </div>
+    </div>
+
+    <!-- ── JD Preview ── -->
+    <div class="glass jd-preview" style="margin-bottom:16px;">
+      <div class="jd-preview-header" id="jd-toggle-btn">
+        <h3 class="heading-sm">Job Description</h3>
+        <span class="jd-toggle-label">Show more ▼</span>
+      </div>
+      <p class="jd-preview-text body-text" id="jd-preview-text">—</p>
+    </div>
+
+    <!-- ── Detected Skills ── -->
+    <div id="skills-section" style="margin-bottom:20px;">
+      <div class="ds-label" style="margin-bottom:8px;">Skills detected</div>
+      <div id="jd-skills" class="skills-row">
+        <span class="body-text" style="font-size:13px;color:#4b5563;">None detected</span>
+      </div>
+    </div>
+
+    <!-- ── Filter Bar ── -->
+    <div class="filter-bar glass" style="margin-bottom:20px;">
+      <div class="filter-group">
+        <span class="ds-label">Min Score</span>
+        <input type="range" id="score-slider" class="ds-slider" min="0" max="100" value="0" step="1" />
+        <span class="filter-value" id="score-value">0%</span>
+      </div>
+      <div class="filter-group">
+        <span class="ds-label">Category</span>
+        <select id="category-filter" class="ds-select" style="min-width:160px;">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <span class="ds-label">Showing</span>
+        <span class="filter-value"><span id="filtered-count">—</span> candidates</span>
+      </div>
+      <div class="filter-bar-actions">
+        <button class="btn-secondary btn-sm" id="reset-filters-btn">Reset Filters</button>
+      </div>
+    </div>
+
+    <!-- ── Candidates List ── -->
+    <div class="candidates-list" id="candidates-list">
+      <div class="empty-state">
+        <div class="empty-icon">⏳</div>
+        <h3>Loading results…</h3>
+        <p>Reading from session storage.</p>
+      </div>
+    </div>
+
+  </div><!-- /page-content-wide -->
+
+  <footer class="lp-footer">
+    RecruitAI &bull; BERT-powered resume screening &bull; <a href="about.html">Learn more</a>
+  </footer>
+</div><!-- /page-root -->
+
+<!-- ── CV Preview Modal — IDs preserved for results.js ── -->
+<div class="cv-modal" id="cv-modal" style="display:none;" role="dialog" aria-modal="true">
+  <div class="cv-modal-overlay" id="cv-modal-overlay"></div>
+  <div class="cv-modal-box">
+    <div class="cv-modal-header">
+      <div class="cv-modal-title-row">
+        <span class="cv-modal-icon">📄</span>
+        <h3 class="cv-modal-title" id="cv-modal-title">CV Preview</h3>
+      </div>
+      <button class="cv-modal-close" id="cv-modal-close" title="Close">✕</button>
+    </div>
+    <div class="cv-modal-body" id="cv-modal-body"></div>
+  </div>
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/results.js"></script>
+<script>
+  document.getElementById('reset-filters-btn')?.addEventListener('click', () => {
+    const slider = document.getElementById('score-slider');
+    const catSel = document.getElementById('category-filter');
+    const valEl  = document.getElementById('score-value');
+    if (slider) { slider.value = 0; }
+    if (valEl)  { valEl.textContent = '0%'; }
+    if (catSel) { catSel.value = 'all'; }
+    if (typeof applyFilters === 'function') applyFilters();
+  });
+</script>
+
+</body>
+</html>
