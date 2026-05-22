@@ -1,7 +1,3 @@
-# Backend-specific requirements
-# Install with: pip install -r backend/requirements.txt
-# Scanned source: every .py file inside backend/
-
 # Web Framework
 fastapi==0.111.0
 pydantic==2.7.1
@@ -15,13 +11,7 @@ scikit-learn==1.5.0
 pdfplumber==0.11.0
 python-docx==1.1.0
 
-# Database
-# No database dependencies — embeddings stored as .pkl files
-
 # Utilities
 numpy==1.26.4
 pandas==2.2.2
 joblib==1.4.2
-
-# Development
-# No development-only imports found in backend source files
