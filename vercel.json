@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.11",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index" },
+    { "source": "/css/:path*",    "destination": "/frontend/css/:path*" },
+    { "source": "/js/:path*",     "destination": "/frontend/js/:path*" },
+    { "source": "/assets/:path*", "destination": "/frontend/assets/:path*" },
+    { "source": "/upload.html",   "destination": "/frontend/upload.html" },
+    { "source": "/results.html",  "destination": "/frontend/results.html" },
+    { "source": "/about.html",    "destination": "/frontend/about.html" },
+    { "source": "/",              "destination": "/frontend/index.html" }
+  ]
+}
