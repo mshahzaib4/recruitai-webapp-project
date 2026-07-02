@@ -1,4 +1,7 @@
-const API_BASE = 'http://localhost:8000';
+// In production, update this to your Render backend URL (e.g. https://recruitai-backend.onrender.com)
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:8000'
+  : 'https://recruitai-backend.onrender.com';
 
 /**
  * Rank dataset resumes against a job description.

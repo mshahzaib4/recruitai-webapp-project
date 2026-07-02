@@ -6,9 +6,9 @@ __pycache__/
 venv/
 .venv/
 
-# Data & Models (too large for git)
+# Data & Models
 notebook/data/*.csv
-backend/models/saved/*.pkl
+# bert_model weights are downloaded at Docker build time — not stored in git
 backend/models/saved/bert_model/
 
 # Jupyter

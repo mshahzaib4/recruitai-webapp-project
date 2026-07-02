@@ -1,0 +1,30 @@
+services:
+  # ── Backend: FastAPI + BERT ──────────────────────────────────────────────────
+  - type: web
+    name: recruitai-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    envVars:
+      - key: MODEL_PATH
+        value: models/saved/bert_model
+      - key: EMBEDDINGS_PATH
+        value: models/saved/resume_embeddings.pkl
+      - key: DATA_PATH
+        value: models/saved/resume_data.pkl
+      - key: MAX_FILE_SIZE_MB
+        value: 10
+      - key: TOP_K_RESULTS
+        value: 10
+
+  # ── Frontend: Static HTML/CSS/JS ─────────────────────────────────────────────
+  - type: web
+    name: recruitai-frontend
+    runtime: static
+    staticPublishPath: ./frontend
+    plan: free
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600

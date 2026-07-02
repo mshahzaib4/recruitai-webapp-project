@@ -22,7 +22,12 @@ RUN pip install --default-timeout=1000 --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir spacy
 RUN python -m spacy download en_core_web_sm
 
-# ensure models exist
+# Download BERT model at build time so cold starts are instant
+RUN python -c "\
+from sentence_transformers import SentenceTransformer; \
+SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2').save('models/saved/bert_model')"
+
+# Verify pkl files and model are present
 RUN ls -R models/saved
 
 EXPOSE 8000
