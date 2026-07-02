@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" status --short)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" log --oneline -5)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" ls-files --others --exclude-standard)",
+      "PowerShell(head -20)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" ls-files --deleted)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" show HEAD:render.yaml)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" ls-files -v render.yaml)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" cat-file -s HEAD:backend/models/saved/resume_embeddings.pkl)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" cat-file -s HEAD:backend/models/saved/resume_data.pkl)",
+      "PowerShell(New-Item -ItemType Directory -Path \"g:\\\\Resume Project\\\\recruitai\\\\api\" -Force)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" checkout HEAD -- render.yaml)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" add .env.example backend/core/config.py backend/ml/embedder.py backend/requirements.txt frontend/js/api.js api/index.py vercel.json)",
+      "PowerShell(git -C \"g:\\\\Resume Project\\\\recruitai\" diff --cached --stat)"
+    ]
+  }
+}

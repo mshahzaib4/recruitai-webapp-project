@@ -295,6 +295,6 @@ Open an issue on GitHub and describe your problem. Please include:
 - What you were trying to do
 - The exact error message you saw (copy and paste it)
 - Your operating system (Windows / Mac / Linux)
-- Your Python version (`python --version`)
+- Your Python version (`Python 3.11.15`)
 
 > **GitHub Issues:** [github.com/your-username/recruitai/issues](https://github.com/your-username/recruitai/issues)
