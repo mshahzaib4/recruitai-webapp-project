@@ -1,22 +1,30 @@
 """
 Vercel Python serverless function entry point.
-Adds the backend directory to sys.path and sets absolute paths for the pkl
-files, then re-exports the FastAPI `app` so Vercel's Python runtime can serve it.
+Routes all traffic through FastAPI — API endpoints handle /api/* and
+FastAPI's StaticFiles serves the frontend for everything else.
 """
 import os
 import sys
 
-# Resolve paths relative to this file so they work in Vercel's /var/task/ root.
+# Resolve absolute paths (Vercel runs from /var/task/)
 _here = os.path.dirname(os.path.abspath(__file__))
-_backend = os.path.join(_here, "..", "backend")
+_root = os.path.abspath(os.path.join(_here, ".."))
+_backend = os.path.join(_root, "backend")
+_frontend = os.path.join(_root, "frontend")
 _models = os.path.join(_backend, "models", "saved")
 
-sys.path.insert(0, os.path.abspath(_backend))
+sys.path.insert(0, _backend)
 
-# Override model paths with absolute paths before settings are imported.
+# Set pkl paths before settings module is imported
 os.environ.setdefault("EMBEDDINGS_PATH", os.path.join(_models, "resume_embeddings.pkl"))
 os.environ.setdefault("DATA_PATH", os.path.join(_models, "resume_data.pkl"))
 
-from main import app  # noqa: E402  must come after sys.path / env setup
+from main import app  # noqa: E402
+
+# Serve the frontend as a catch-all AFTER all API routes are registered
+from fastapi.staticfiles import StaticFiles  # noqa: E402
+
+if os.path.isdir(_frontend):
+    app.mount("/", StaticFiles(directory=_frontend, html=True), name="static")
 
 __all__ = ["app"]
